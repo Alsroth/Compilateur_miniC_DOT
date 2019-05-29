@@ -1,0 +1,23 @@
+extern int printd( int i );
+extern int fct2param(int x,int y);
+extern int fct1param();
+extern int fct1param();
+
+void function(int i,int i)
+{
+    i = i + j;
+    return j;
+}
+
+
+
+int main() {
+  int i,j,i;
+  int i ;
+  if(i < j){
+    int x;
+    x = 1;
+  }
+  x = 2;
+  function(i,j);
+  i = fct2param(12);}

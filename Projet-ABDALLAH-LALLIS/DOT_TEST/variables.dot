@@ -1,0 +1,18 @@
+digraph mon_programme {
+node1[shape=ellipse label="a" style=solid color=black]
+node3[shape=ellipse label="0" style=solid color=black]
+node4[shape=ellipse label=":=" style=solid color=black]
+node5[shape=ellipse label="b" style=solid color=black]
+node7[shape=ellipse label="1" style=solid color=black]
+node8[shape=ellipse label=":=" style=solid color=black]
+node9[shape=ellipse label="BLOC" style=solid color=black]
+node10[shape=invtrapezium label="int , main" style=solid color=blue]
+node10->node9
+node9->node8
+node8->node7
+node8->node5
+node9->node4
+node4->node3
+node4->node1
+
+}

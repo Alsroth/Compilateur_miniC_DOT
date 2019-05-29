@@ -1,0 +1,45 @@
+digraph mon_programme {
+node1[shape=ellipse label="n" style=solid color=black]
+node3[shape=ellipse label="1" style=solid color=black]
+node4[shape=ellipse label="<=" style=solid color=black]
+node5[shape=ellipse label="1" style=solid color=black]
+node6[shape=trapezium label="RETURN" style=solid color=blue]
+node7[shape=diamond label="IF" style=solid color=black]
+node8[shape=ellipse label="n" style=solid color=black]
+node10[shape=ellipse label="n" style=solid color=black]
+node12[shape=ellipse label="1" style=solid color=black]
+node13[shape=ellipse label="-" style=solid color=black]
+node14[shape=ellipse label="fact" style=solid color=black]
+node15[shape=ellipse label="*" style=solid color=black]
+node16[shape=trapezium label="RETURN" style=solid color=blue]
+node17[shape=ellipse label="BLOC" style=solid color=black]
+node18[shape=invtrapezium label="int , fact" style=solid color=blue]
+node19[shape=ellipse label="10" style=solid color=black]
+node20[shape=ellipse label="fact" style=solid color=black]
+node21[shape=septagon label="printd" style=solid color=black]
+node22[shape=ellipse label="0" style=solid color=black]
+node23[shape=trapezium label="RETURN" style=solid color=blue]
+node24[shape=ellipse label="BLOC" style=solid color=black]
+node25[shape=invtrapezium label="int , main" style=solid color=blue]
+node25->node24
+node24->node23
+node23->node22
+node24->node21
+node21->node20
+node20->node19
+node18->node17
+node17->node16
+node16->node15
+node15->node14
+node14->node13
+node13->node12
+node13->node10
+node15->node8
+node17->node7
+node7->node6
+node6->node5
+node7->node4
+node4->node3
+node4->node1
+
+}

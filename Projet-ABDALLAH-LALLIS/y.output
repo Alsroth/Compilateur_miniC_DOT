@@ -1,0 +1,2072 @@
+Terminaux inutilisés dans la grammaire
+
+   OP
+
+
+Grammaire
+
+    0 $accept: programme $end
+
+    1 programme: liste_declarations liste_fonctions
+
+    2 liste_declarations: liste_declarations declaration
+    3                   | %empty
+
+    4 liste_fonctions: liste_fonctions fonction
+    5                | fonction
+
+    6 declaration: type liste_declarateurs ';'
+
+    7 liste_declarateurs: liste_declarateurs ',' declarateur
+    8                   | declarateur
+
+    9 declarateur: IDENTIFICATEUR
+   10            | declarateur '[' CONSTANTE ']'
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations liste_instructions '}'
+   12         | EXTERN type IDENTIFICATEUR '(' liste_parms ')' ';'
+
+   13 type: VOID
+   14     | INT
+
+   15 liste_parms: parm
+   16            | liste_parms ',' parm
+   17            | %empty
+
+   18 parm: INT IDENTIFICATEUR
+
+   19 liste_instructions: liste_instructions instruction
+   20                   | %empty
+
+   21 instruction: iteration
+   22            | selection
+   23            | saut
+   24            | affectation ';'
+   25            | bloc
+   26            | appel
+
+   27 iteration: FOR '(' affectation ';' condition ';' affectation ')' instruction
+   28          | WHILE '(' condition ')' instruction
+
+   29 selection: IF '(' condition ')' instruction
+   30          | IF '(' condition ')' instruction ELSE instruction
+   31          | SWITCH '(' expression_switch ')' instruction
+   32          | CASE CONSTANTE ':' instruction
+   33          | DEFAULT ':' instruction
+
+   34 saut: BREAK ';'
+   35     | RETURN ';'
+   36     | RETURN expression ';'
+
+   37 expression_switch: expression
+
+   38 affectation: variable '=' expression
+
+   39 bloc: '{' liste_declarations liste_instructions '}'
+
+   40 appel: IDENTIFICATEUR '(' liste_expressions ')' ';'
+
+   41 variable: IDENTIFICATEUR
+   42         | variable '[' expression ']'
+
+   43 expression: '(' expression ')'
+   44           | expression PLUS expression
+   45           | expression MOINS expression
+   46           | expression MUL expression
+   47           | expression DIV expression
+   48           | expression LSHIFT expression
+   49           | expression RSHIFT expression
+   50           | expression BAND expression
+   51           | expression BOR expression
+   52           | MOINS expression
+   53           | CONSTANTE
+   54           | variable
+   55           | IDENTIFICATEUR '(' liste_expressions ')'
+
+   56 liste_expressions: expression
+   57                  | liste_expressions ',' expression
+   58                  | %empty
+
+   59 condition: NOT '(' condition ')'
+   60          | condition binary_rel condition
+   61          | '(' condition ')'
+   62          | expression binary_comp expression
+
+   63 binary_rel: LAND
+   64           | LOR
+
+   65 binary_comp: LT
+   66            | GT
+   67            | GEQ
+   68            | LEQ
+   69            | EQ
+   70            | NEQ
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+'(' (40) 11 12 27 28 29 30 31 40 43 55 59 61
+')' (41) 11 12 27 28 29 30 31 40 43 55 59 61
+',' (44) 7 16 57
+':' (58) 32 33
+';' (59) 6 12 24 27 34 35 36 40
+'=' (61) 38
+'[' (91) 10 42
+']' (93) 10 42
+'{' (123) 11 39
+'}' (125) 11 39
+error (256)
+VOID (258) 13
+INT (259) 14 18
+FOR (260) 27
+WHILE (261) 28
+IF (262) 29 30
+ELSE (263) 30
+SWITCH (264) 31
+CASE (265) 32
+DEFAULT (266) 33
+IDENTIFICATEUR (267) 9 11 12 18 40 41 55
+CONSTANTE (268) 10 32 53
+BREAK (269) 34
+RETURN (270) 35 36
+PLUS (271) 44
+MOINS (272) 45 52
+MUL (273) 46
+DIV (274) 47
+LSHIFT (275) 48
+RSHIFT (276) 49
+BAND (277) 50
+BOR (278) 51
+LAND (279) 63
+LOR (280) 64
+LT (281) 65
+GT (282) 66
+GEQ (283) 67
+LEQ (284) 68
+EQ (285) 69
+NEQ (286) 70
+NOT (287) 59
+EXTERN (288) 12
+THEN (289)
+OP (290)
+REL (291)
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (47)
+    à gauche: 0
+programme (48)
+    à gauche: 1, à droite: 0
+liste_declarations (49)
+    à gauche: 2 3, à droite: 1 2 11 39
+liste_fonctions (50)
+    à gauche: 4 5, à droite: 1 4
+declaration (51)
+    à gauche: 6, à droite: 2
+liste_declarateurs (52)
+    à gauche: 7 8, à droite: 6 7
+declarateur (53)
+    à gauche: 9 10, à droite: 7 8 10
+fonction (54)
+    à gauche: 11 12, à droite: 4 5
+type (55)
+    à gauche: 13 14, à droite: 6 11 12
+liste_parms (56)
+    à gauche: 15 16 17, à droite: 11 12 16
+parm (57)
+    à gauche: 18, à droite: 15 16
+liste_instructions (58)
+    à gauche: 19 20, à droite: 11 19 39
+instruction (59)
+    à gauche: 21 22 23 24 25 26, à droite: 19 27 28 29 30 31 32 33
+iteration (60)
+    à gauche: 27 28, à droite: 21
+selection (61)
+    à gauche: 29 30 31 32 33, à droite: 22
+saut (62)
+    à gauche: 34 35 36, à droite: 23
+expression_switch (63)
+    à gauche: 37, à droite: 31
+affectation (64)
+    à gauche: 38, à droite: 24 27
+bloc (65)
+    à gauche: 39, à droite: 25
+appel (66)
+    à gauche: 40, à droite: 26
+variable (67)
+    à gauche: 41 42, à droite: 38 42 54
+expression (68)
+    à gauche: 43 44 45 46 47 48 49 50 51 52 53 54 55, à droite: 36
+    37 38 42 43 44 45 46 47 48 49 50 51 52 56 57 62
+liste_expressions (69)
+    à gauche: 56 57 58, à droite: 40 55 57
+condition (70)
+    à gauche: 59 60 61 62, à droite: 27 28 29 30 59 60 61
+binary_rel (71)
+    à gauche: 63 64, à droite: 60
+binary_comp (72)
+    à gauche: 65 66 67 68 69 70, à droite: 62
+
+
+État 0
+
+    0 $accept: . programme $end
+
+    $défaut  réduction par utilisation de la règle 3 (liste_declarations)
+
+    programme           aller à l'état 1
+    liste_declarations  aller à l'état 2
+
+
+État 1
+
+    0 $accept: programme . $end
+
+    $end  décalage et aller à l'état 3
+
+
+État 2
+
+    1 programme: liste_declarations . liste_fonctions
+    2 liste_declarations: liste_declarations . declaration
+
+    VOID    décalage et aller à l'état 4
+    INT     décalage et aller à l'état 5
+    EXTERN  décalage et aller à l'état 6
+
+    liste_fonctions  aller à l'état 7
+    declaration      aller à l'état 8
+    fonction         aller à l'état 9
+    type             aller à l'état 10
+
+
+État 3
+
+    0 $accept: programme $end .
+
+    $défaut  accepter
+
+
+État 4
+
+   13 type: VOID .
+
+    $défaut  réduction par utilisation de la règle 13 (type)
+
+
+État 5
+
+   14 type: INT .
+
+    $défaut  réduction par utilisation de la règle 14 (type)
+
+
+État 6
+
+   12 fonction: EXTERN . type IDENTIFICATEUR '(' liste_parms ')' ';'
+
+    VOID  décalage et aller à l'état 4
+    INT   décalage et aller à l'état 5
+
+    type  aller à l'état 11
+
+
+État 7
+
+    1 programme: liste_declarations liste_fonctions .
+    4 liste_fonctions: liste_fonctions . fonction
+
+    VOID    décalage et aller à l'état 4
+    INT     décalage et aller à l'état 5
+    EXTERN  décalage et aller à l'état 6
+
+    $défaut  réduction par utilisation de la règle 1 (programme)
+
+    fonction  aller à l'état 12
+    type      aller à l'état 13
+
+
+État 8
+
+    2 liste_declarations: liste_declarations declaration .
+
+    $défaut  réduction par utilisation de la règle 2 (liste_declarations)
+
+
+État 9
+
+    5 liste_fonctions: fonction .
+
+    $défaut  réduction par utilisation de la règle 5 (liste_fonctions)
+
+
+État 10
+
+    6 declaration: type . liste_declarateurs ';'
+   11 fonction: type . IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations liste_instructions '}'
+
+    IDENTIFICATEUR  décalage et aller à l'état 14
+
+    liste_declarateurs  aller à l'état 15
+    declarateur         aller à l'état 16
+
+
+État 11
+
+   12 fonction: EXTERN type . IDENTIFICATEUR '(' liste_parms ')' ';'
+
+    IDENTIFICATEUR  décalage et aller à l'état 17
+
+
+État 12
+
+    4 liste_fonctions: liste_fonctions fonction .
+
+    $défaut  réduction par utilisation de la règle 4 (liste_fonctions)
+
+
+État 13
+
+   11 fonction: type . IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations liste_instructions '}'
+
+    IDENTIFICATEUR  décalage et aller à l'état 18
+
+
+État 14
+
+    9 declarateur: IDENTIFICATEUR .
+   11 fonction: type IDENTIFICATEUR . '(' liste_parms ')' '{' liste_declarations liste_instructions '}'
+
+    '('  décalage et aller à l'état 19
+
+    $défaut  réduction par utilisation de la règle 9 (declarateur)
+
+
+État 15
+
+    6 declaration: type liste_declarateurs . ';'
+    7 liste_declarateurs: liste_declarateurs . ',' declarateur
+
+    ';'  décalage et aller à l'état 20
+    ','  décalage et aller à l'état 21
+
+
+État 16
+
+    8 liste_declarateurs: declarateur .
+   10 declarateur: declarateur . '[' CONSTANTE ']'
+
+    '['  décalage et aller à l'état 22
+
+    $défaut  réduction par utilisation de la règle 8 (liste_declarateurs)
+
+
+État 17
+
+   12 fonction: EXTERN type IDENTIFICATEUR . '(' liste_parms ')' ';'
+
+    '('  décalage et aller à l'état 23
+
+
+État 18
+
+   11 fonction: type IDENTIFICATEUR . '(' liste_parms ')' '{' liste_declarations liste_instructions '}'
+
+    '('  décalage et aller à l'état 19
+
+
+État 19
+
+   11 fonction: type IDENTIFICATEUR '(' . liste_parms ')' '{' liste_declarations liste_instructions '}'
+
+    INT  décalage et aller à l'état 24
+
+    $défaut  réduction par utilisation de la règle 17 (liste_parms)
+
+    liste_parms  aller à l'état 25
+    parm         aller à l'état 26
+
+
+État 20
+
+    6 declaration: type liste_declarateurs ';' .
+
+    $défaut  réduction par utilisation de la règle 6 (declaration)
+
+
+État 21
+
+    7 liste_declarateurs: liste_declarateurs ',' . declarateur
+
+    IDENTIFICATEUR  décalage et aller à l'état 27
+
+    declarateur  aller à l'état 28
+
+
+État 22
+
+   10 declarateur: declarateur '[' . CONSTANTE ']'
+
+    CONSTANTE  décalage et aller à l'état 29
+
+
+État 23
+
+   12 fonction: EXTERN type IDENTIFICATEUR '(' . liste_parms ')' ';'
+
+    INT  décalage et aller à l'état 24
+
+    $défaut  réduction par utilisation de la règle 17 (liste_parms)
+
+    liste_parms  aller à l'état 30
+    parm         aller à l'état 26
+
+
+État 24
+
+   18 parm: INT . IDENTIFICATEUR
+
+    IDENTIFICATEUR  décalage et aller à l'état 31
+
+
+État 25
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms . ')' '{' liste_declarations liste_instructions '}'
+   16 liste_parms: liste_parms . ',' parm
+
+    ','  décalage et aller à l'état 32
+    ')'  décalage et aller à l'état 33
+
+
+État 26
+
+   15 liste_parms: parm .
+
+    $défaut  réduction par utilisation de la règle 15 (liste_parms)
+
+
+État 27
+
+    9 declarateur: IDENTIFICATEUR .
+
+    $défaut  réduction par utilisation de la règle 9 (declarateur)
+
+
+État 28
+
+    7 liste_declarateurs: liste_declarateurs ',' declarateur .
+   10 declarateur: declarateur . '[' CONSTANTE ']'
+
+    '['  décalage et aller à l'état 22
+
+    $défaut  réduction par utilisation de la règle 7 (liste_declarateurs)
+
+
+État 29
+
+   10 declarateur: declarateur '[' CONSTANTE . ']'
+
+    ']'  décalage et aller à l'état 34
+
+
+État 30
+
+   12 fonction: EXTERN type IDENTIFICATEUR '(' liste_parms . ')' ';'
+   16 liste_parms: liste_parms . ',' parm
+
+    ','  décalage et aller à l'état 32
+    ')'  décalage et aller à l'état 35
+
+
+État 31
+
+   18 parm: INT IDENTIFICATEUR .
+
+    $défaut  réduction par utilisation de la règle 18 (parm)
+
+
+État 32
+
+   16 liste_parms: liste_parms ',' . parm
+
+    INT  décalage et aller à l'état 24
+
+    parm  aller à l'état 36
+
+
+État 33
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' . '{' liste_declarations liste_instructions '}'
+
+    '{'  décalage et aller à l'état 37
+
+
+État 34
+
+   10 declarateur: declarateur '[' CONSTANTE ']' .
+
+    $défaut  réduction par utilisation de la règle 10 (declarateur)
+
+
+État 35
+
+   12 fonction: EXTERN type IDENTIFICATEUR '(' liste_parms ')' . ';'
+
+    ';'  décalage et aller à l'état 38
+
+
+État 36
+
+   16 liste_parms: liste_parms ',' parm .
+
+    $défaut  réduction par utilisation de la règle 16 (liste_parms)
+
+
+État 37
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' '{' . liste_declarations liste_instructions '}'
+
+    $défaut  réduction par utilisation de la règle 3 (liste_declarations)
+
+    liste_declarations  aller à l'état 39
+
+
+État 38
+
+   12 fonction: EXTERN type IDENTIFICATEUR '(' liste_parms ')' ';' .
+
+    $défaut  réduction par utilisation de la règle 12 (fonction)
+
+
+État 39
+
+    2 liste_declarations: liste_declarations . declaration
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations . liste_instructions '}'
+
+    VOID  décalage et aller à l'état 4
+    INT   décalage et aller à l'état 5
+
+    $défaut  réduction par utilisation de la règle 20 (liste_instructions)
+
+    declaration         aller à l'état 8
+    type                aller à l'état 40
+    liste_instructions  aller à l'état 41
+
+
+État 40
+
+    6 declaration: type . liste_declarateurs ';'
+
+    IDENTIFICATEUR  décalage et aller à l'état 27
+
+    liste_declarateurs  aller à l'état 15
+    declarateur         aller à l'état 16
+
+
+État 41
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations liste_instructions . '}'
+   19 liste_instructions: liste_instructions . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+    '}'             décalage et aller à l'état 52
+
+    instruction  aller à l'état 53
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 42
+
+   27 iteration: FOR . '(' affectation ';' condition ';' affectation ')' instruction
+
+    '('  décalage et aller à l'état 61
+
+
+État 43
+
+   28 iteration: WHILE . '(' condition ')' instruction
+
+    '('  décalage et aller à l'état 62
+
+
+État 44
+
+   29 selection: IF . '(' condition ')' instruction
+   30          | IF . '(' condition ')' instruction ELSE instruction
+
+    '('  décalage et aller à l'état 63
+
+
+État 45
+
+   31 selection: SWITCH . '(' expression_switch ')' instruction
+
+    '('  décalage et aller à l'état 64
+
+
+État 46
+
+   32 selection: CASE . CONSTANTE ':' instruction
+
+    CONSTANTE  décalage et aller à l'état 65
+
+
+État 47
+
+   33 selection: DEFAULT . ':' instruction
+
+    ':'  décalage et aller à l'état 66
+
+
+État 48
+
+   40 appel: IDENTIFICATEUR . '(' liste_expressions ')' ';'
+   41 variable: IDENTIFICATEUR .
+
+    '('  décalage et aller à l'état 67
+
+    $défaut  réduction par utilisation de la règle 41 (variable)
+
+
+État 49
+
+   34 saut: BREAK . ';'
+
+    ';'  décalage et aller à l'état 68
+
+
+État 50
+
+   35 saut: RETURN . ';'
+   36     | RETURN . expression ';'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    ';'             décalage et aller à l'état 72
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 75
+
+
+État 51
+
+   39 bloc: '{' . liste_declarations liste_instructions '}'
+
+    $défaut  réduction par utilisation de la règle 3 (liste_declarations)
+
+    liste_declarations  aller à l'état 76
+
+
+État 52
+
+   11 fonction: type IDENTIFICATEUR '(' liste_parms ')' '{' liste_declarations liste_instructions '}' .
+
+    $défaut  réduction par utilisation de la règle 11 (fonction)
+
+
+État 53
+
+   19 liste_instructions: liste_instructions instruction .
+
+    $défaut  réduction par utilisation de la règle 19 (liste_instructions)
+
+
+État 54
+
+   21 instruction: iteration .
+
+    $défaut  réduction par utilisation de la règle 21 (instruction)
+
+
+État 55
+
+   22 instruction: selection .
+
+    $défaut  réduction par utilisation de la règle 22 (instruction)
+
+
+État 56
+
+   23 instruction: saut .
+
+    $défaut  réduction par utilisation de la règle 23 (instruction)
+
+
+État 57
+
+   24 instruction: affectation . ';'
+
+    ';'  décalage et aller à l'état 77
+
+
+État 58
+
+   25 instruction: bloc .
+
+    $défaut  réduction par utilisation de la règle 25 (instruction)
+
+
+État 59
+
+   26 instruction: appel .
+
+    $défaut  réduction par utilisation de la règle 26 (instruction)
+
+
+État 60
+
+   38 affectation: variable . '=' expression
+   42 variable: variable . '[' expression ']'
+
+    '['  décalage et aller à l'état 78
+    '='  décalage et aller à l'état 79
+
+
+État 61
+
+   27 iteration: FOR '(' . affectation ';' condition ';' affectation ')' instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 80
+
+    affectation  aller à l'état 81
+    variable     aller à l'état 60
+
+
+État 62
+
+   28 iteration: WHILE '(' . condition ')' instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 84
+    condition   aller à l'état 85
+
+
+État 63
+
+   29 selection: IF '(' . condition ')' instruction
+   30          | IF '(' . condition ')' instruction ELSE instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 84
+    condition   aller à l'état 86
+
+
+État 64
+
+   31 selection: SWITCH '(' . expression_switch ')' instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    expression_switch  aller à l'état 87
+    variable           aller à l'état 74
+    expression         aller à l'état 88
+
+
+État 65
+
+   32 selection: CASE CONSTANTE . ':' instruction
+
+    ':'  décalage et aller à l'état 89
+
+
+État 66
+
+   33 selection: DEFAULT ':' . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 90
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 67
+
+   40 appel: IDENTIFICATEUR '(' . liste_expressions ')' ';'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    $défaut  réduction par utilisation de la règle 58 (liste_expressions)
+
+    variable           aller à l'état 74
+    expression         aller à l'état 91
+    liste_expressions  aller à l'état 92
+
+
+État 68
+
+   34 saut: BREAK ';' .
+
+    $défaut  réduction par utilisation de la règle 34 (saut)
+
+
+État 69
+
+   41 variable: IDENTIFICATEUR .
+   55 expression: IDENTIFICATEUR . '(' liste_expressions ')'
+
+    '('  décalage et aller à l'état 93
+
+    $défaut  réduction par utilisation de la règle 41 (variable)
+
+
+État 70
+
+   53 expression: CONSTANTE .
+
+    $défaut  réduction par utilisation de la règle 53 (expression)
+
+
+État 71
+
+   52 expression: MOINS . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 94
+
+
+État 72
+
+   35 saut: RETURN ';' .
+
+    $défaut  réduction par utilisation de la règle 35 (saut)
+
+
+État 73
+
+   43 expression: '(' . expression ')'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 95
+
+
+État 74
+
+   42 variable: variable . '[' expression ']'
+   54 expression: variable .
+
+    '['  décalage et aller à l'état 78
+
+    $défaut  réduction par utilisation de la règle 54 (expression)
+
+
+État 75
+
+   36 saut: RETURN expression . ';'
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+    ';'     décalage et aller à l'état 104
+
+
+État 76
+
+    2 liste_declarations: liste_declarations . declaration
+   39 bloc: '{' liste_declarations . liste_instructions '}'
+
+    VOID  décalage et aller à l'état 4
+    INT   décalage et aller à l'état 5
+
+    $défaut  réduction par utilisation de la règle 20 (liste_instructions)
+
+    declaration         aller à l'état 8
+    type                aller à l'état 40
+    liste_instructions  aller à l'état 105
+
+
+État 77
+
+   24 instruction: affectation ';' .
+
+    $défaut  réduction par utilisation de la règle 24 (instruction)
+
+
+État 78
+
+   42 variable: variable '[' . expression ']'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 106
+
+
+État 79
+
+   38 affectation: variable '=' . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 107
+
+
+État 80
+
+   41 variable: IDENTIFICATEUR .
+
+    $défaut  réduction par utilisation de la règle 41 (variable)
+
+
+État 81
+
+   27 iteration: FOR '(' affectation . ';' condition ';' affectation ')' instruction
+
+    ';'  décalage et aller à l'état 108
+
+
+État 82
+
+   59 condition: NOT . '(' condition ')'
+
+    '('  décalage et aller à l'état 109
+
+
+État 83
+
+   43 expression: '(' . expression ')'
+   61 condition: '(' . condition ')'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 110
+    condition   aller à l'état 111
+
+
+État 84
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   62 condition: expression . binary_comp expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+    LT      décalage et aller à l'état 112
+    GT      décalage et aller à l'état 113
+    GEQ     décalage et aller à l'état 114
+    LEQ     décalage et aller à l'état 115
+    EQ      décalage et aller à l'état 116
+    NEQ     décalage et aller à l'état 117
+
+    binary_comp  aller à l'état 118
+
+
+État 85
+
+   28 iteration: WHILE '(' condition . ')' instruction
+   60 condition: condition . binary_rel condition
+
+    LAND  décalage et aller à l'état 119
+    LOR   décalage et aller à l'état 120
+    ')'   décalage et aller à l'état 121
+
+    binary_rel  aller à l'état 122
+
+
+État 86
+
+   29 selection: IF '(' condition . ')' instruction
+   30          | IF '(' condition . ')' instruction ELSE instruction
+   60 condition: condition . binary_rel condition
+
+    LAND  décalage et aller à l'état 119
+    LOR   décalage et aller à l'état 120
+    ')'   décalage et aller à l'état 123
+
+    binary_rel  aller à l'état 122
+
+
+État 87
+
+   31 selection: SWITCH '(' expression_switch . ')' instruction
+
+    ')'  décalage et aller à l'état 124
+
+
+État 88
+
+   37 expression_switch: expression .
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 37 (expression_switch)
+
+
+État 89
+
+   32 selection: CASE CONSTANTE ':' . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 125
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 90
+
+   33 selection: DEFAULT ':' instruction .
+
+    $défaut  réduction par utilisation de la règle 33 (selection)
+
+
+État 91
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   56 liste_expressions: expression .
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 56 (liste_expressions)
+
+
+État 92
+
+   40 appel: IDENTIFICATEUR '(' liste_expressions . ')' ';'
+   57 liste_expressions: liste_expressions . ',' expression
+
+    ','  décalage et aller à l'état 126
+    ')'  décalage et aller à l'état 127
+
+
+État 93
+
+   55 expression: IDENTIFICATEUR '(' . liste_expressions ')'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    $défaut  réduction par utilisation de la règle 58 (liste_expressions)
+
+    variable           aller à l'état 74
+    expression         aller à l'état 91
+    liste_expressions  aller à l'état 128
+
+
+État 94
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   52           | MOINS expression .
+
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 52 (expression)
+
+
+État 95
+
+   43 expression: '(' expression . ')'
+   44           | expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+    ')'     décalage et aller à l'état 129
+
+
+État 96
+
+   44 expression: expression PLUS . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 130
+
+
+État 97
+
+   45 expression: expression MOINS . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 131
+
+
+État 98
+
+   46 expression: expression MUL . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 132
+
+
+État 99
+
+   47 expression: expression DIV . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 133
+
+
+État 100
+
+   48 expression: expression LSHIFT . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 134
+
+
+État 101
+
+   49 expression: expression RSHIFT . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 135
+
+
+État 102
+
+   50 expression: expression BAND . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 136
+
+
+État 103
+
+   51 expression: expression BOR . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 137
+
+
+État 104
+
+   36 saut: RETURN expression ';' .
+
+    $défaut  réduction par utilisation de la règle 36 (saut)
+
+
+État 105
+
+   19 liste_instructions: liste_instructions . instruction
+   39 bloc: '{' liste_declarations liste_instructions . '}'
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+    '}'             décalage et aller à l'état 138
+
+    instruction  aller à l'état 53
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 106
+
+   42 variable: variable '[' expression . ']'
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+    ']'     décalage et aller à l'état 139
+
+
+État 107
+
+   38 affectation: variable '=' expression .
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 38 (affectation)
+
+
+État 108
+
+   27 iteration: FOR '(' affectation ';' . condition ';' affectation ')' instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 84
+    condition   aller à l'état 140
+
+
+État 109
+
+   59 condition: NOT '(' . condition ')'
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 84
+    condition   aller à l'état 141
+
+
+État 110
+
+   43 expression: '(' expression . ')'
+   44           | expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   62 condition: expression . binary_comp expression
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+    LT      décalage et aller à l'état 112
+    GT      décalage et aller à l'état 113
+    GEQ     décalage et aller à l'état 114
+    LEQ     décalage et aller à l'état 115
+    EQ      décalage et aller à l'état 116
+    NEQ     décalage et aller à l'état 117
+    ')'     décalage et aller à l'état 129
+
+    binary_comp  aller à l'état 118
+
+
+État 111
+
+   60 condition: condition . binary_rel condition
+   61          | '(' condition . ')'
+
+    LAND  décalage et aller à l'état 119
+    LOR   décalage et aller à l'état 120
+    ')'   décalage et aller à l'état 142
+
+    binary_rel  aller à l'état 122
+
+
+État 112
+
+   65 binary_comp: LT .
+
+    $défaut  réduction par utilisation de la règle 65 (binary_comp)
+
+
+État 113
+
+   66 binary_comp: GT .
+
+    $défaut  réduction par utilisation de la règle 66 (binary_comp)
+
+
+État 114
+
+   67 binary_comp: GEQ .
+
+    $défaut  réduction par utilisation de la règle 67 (binary_comp)
+
+
+État 115
+
+   68 binary_comp: LEQ .
+
+    $défaut  réduction par utilisation de la règle 68 (binary_comp)
+
+
+État 116
+
+   69 binary_comp: EQ .
+
+    $défaut  réduction par utilisation de la règle 69 (binary_comp)
+
+
+État 117
+
+   70 binary_comp: NEQ .
+
+    $défaut  réduction par utilisation de la règle 70 (binary_comp)
+
+
+État 118
+
+   62 condition: expression binary_comp . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 143
+
+
+État 119
+
+   63 binary_rel: LAND .
+
+    $défaut  réduction par utilisation de la règle 63 (binary_rel)
+
+
+État 120
+
+   64 binary_rel: LOR .
+
+    $défaut  réduction par utilisation de la règle 64 (binary_rel)
+
+
+État 121
+
+   28 iteration: WHILE '(' condition ')' . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 144
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 122
+
+   60 condition: condition binary_rel . condition
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    NOT             décalage et aller à l'état 82
+    '('             décalage et aller à l'état 83
+
+    variable    aller à l'état 74
+    expression  aller à l'état 84
+    condition   aller à l'état 145
+
+
+État 123
+
+   29 selection: IF '(' condition ')' . instruction
+   30          | IF '(' condition ')' . instruction ELSE instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 146
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 124
+
+   31 selection: SWITCH '(' expression_switch ')' . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 147
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 125
+
+   32 selection: CASE CONSTANTE ':' instruction .
+
+    $défaut  réduction par utilisation de la règle 32 (selection)
+
+
+État 126
+
+   57 liste_expressions: liste_expressions ',' . expression
+
+    IDENTIFICATEUR  décalage et aller à l'état 69
+    CONSTANTE       décalage et aller à l'état 70
+    MOINS           décalage et aller à l'état 71
+    '('             décalage et aller à l'état 73
+
+    variable    aller à l'état 74
+    expression  aller à l'état 148
+
+
+État 127
+
+   40 appel: IDENTIFICATEUR '(' liste_expressions ')' . ';'
+
+    ';'  décalage et aller à l'état 149
+
+
+État 128
+
+   55 expression: IDENTIFICATEUR '(' liste_expressions . ')'
+   57 liste_expressions: liste_expressions . ',' expression
+
+    ','  décalage et aller à l'état 126
+    ')'  décalage et aller à l'état 150
+
+
+État 129
+
+   43 expression: '(' expression ')' .
+
+    $défaut  réduction par utilisation de la règle 43 (expression)
+
+
+État 130
+
+   44 expression: expression . PLUS expression
+   44           | expression PLUS expression .
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 44 (expression)
+
+
+État 131
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   45           | expression MOINS expression .
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 45 (expression)
+
+
+État 132
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   46           | expression MUL expression .
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 46 (expression)
+
+
+État 133
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   47           | expression DIV expression .
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 47 (expression)
+
+
+État 134
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   48           | expression LSHIFT expression .
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    BAND  décalage et aller à l'état 102
+    BOR   décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 48 (expression)
+
+
+État 135
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   49           | expression RSHIFT expression .
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+
+    BAND  décalage et aller à l'état 102
+    BOR   décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 49 (expression)
+
+
+État 136
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   50           | expression BAND expression .
+   51           | expression . BOR expression
+
+    $défaut  réduction par utilisation de la règle 50 (expression)
+
+
+État 137
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   51           | expression BOR expression .
+
+    $défaut  réduction par utilisation de la règle 51 (expression)
+
+
+État 138
+
+   39 bloc: '{' liste_declarations liste_instructions '}' .
+
+    $défaut  réduction par utilisation de la règle 39 (bloc)
+
+
+État 139
+
+   42 variable: variable '[' expression ']' .
+
+    $défaut  réduction par utilisation de la règle 42 (variable)
+
+
+État 140
+
+   27 iteration: FOR '(' affectation ';' condition . ';' affectation ')' instruction
+   60 condition: condition . binary_rel condition
+
+    LAND  décalage et aller à l'état 119
+    LOR   décalage et aller à l'état 120
+    ';'   décalage et aller à l'état 151
+
+    binary_rel  aller à l'état 122
+
+
+État 141
+
+   59 condition: NOT '(' condition . ')'
+   60          | condition . binary_rel condition
+
+    LAND  décalage et aller à l'état 119
+    LOR   décalage et aller à l'état 120
+    ')'   décalage et aller à l'état 152
+
+    binary_rel  aller à l'état 122
+
+
+État 142
+
+   61 condition: '(' condition ')' .
+
+    $défaut  réduction par utilisation de la règle 61 (condition)
+
+
+État 143
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   62 condition: expression binary_comp expression .
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 62 (condition)
+
+
+État 144
+
+   28 iteration: WHILE '(' condition ')' instruction .
+
+    $défaut  réduction par utilisation de la règle 28 (iteration)
+
+
+État 145
+
+   60 condition: condition . binary_rel condition
+   60          | condition binary_rel condition .
+
+    $défaut  réduction par utilisation de la règle 60 (condition)
+
+    binary_rel  aller à l'état 122
+
+
+État 146
+
+   29 selection: IF '(' condition ')' instruction .
+   30          | IF '(' condition ')' instruction . ELSE instruction
+
+    ELSE  décalage et aller à l'état 153
+
+    $défaut  réduction par utilisation de la règle 29 (selection)
+
+
+État 147
+
+   31 selection: SWITCH '(' expression_switch ')' instruction .
+
+    $défaut  réduction par utilisation de la règle 31 (selection)
+
+
+État 148
+
+   44 expression: expression . PLUS expression
+   45           | expression . MOINS expression
+   46           | expression . MUL expression
+   47           | expression . DIV expression
+   48           | expression . LSHIFT expression
+   49           | expression . RSHIFT expression
+   50           | expression . BAND expression
+   51           | expression . BOR expression
+   57 liste_expressions: liste_expressions ',' expression .
+
+    PLUS    décalage et aller à l'état 96
+    MOINS   décalage et aller à l'état 97
+    MUL     décalage et aller à l'état 98
+    DIV     décalage et aller à l'état 99
+    LSHIFT  décalage et aller à l'état 100
+    RSHIFT  décalage et aller à l'état 101
+    BAND    décalage et aller à l'état 102
+    BOR     décalage et aller à l'état 103
+
+    $défaut  réduction par utilisation de la règle 57 (liste_expressions)
+
+
+État 149
+
+   40 appel: IDENTIFICATEUR '(' liste_expressions ')' ';' .
+
+    $défaut  réduction par utilisation de la règle 40 (appel)
+
+
+État 150
+
+   55 expression: IDENTIFICATEUR '(' liste_expressions ')' .
+
+    $défaut  réduction par utilisation de la règle 55 (expression)
+
+
+État 151
+
+   27 iteration: FOR '(' affectation ';' condition ';' . affectation ')' instruction
+
+    IDENTIFICATEUR  décalage et aller à l'état 80
+
+    affectation  aller à l'état 154
+    variable     aller à l'état 60
+
+
+État 152
+
+   59 condition: NOT '(' condition ')' .
+
+    $défaut  réduction par utilisation de la règle 59 (condition)
+
+
+État 153
+
+   30 selection: IF '(' condition ')' instruction ELSE . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 155
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 154
+
+   27 iteration: FOR '(' affectation ';' condition ';' affectation . ')' instruction
+
+    ')'  décalage et aller à l'état 156
+
+
+État 155
+
+   30 selection: IF '(' condition ')' instruction ELSE instruction .
+
+    $défaut  réduction par utilisation de la règle 30 (selection)
+
+
+État 156
+
+   27 iteration: FOR '(' affectation ';' condition ';' affectation ')' . instruction
+
+    FOR             décalage et aller à l'état 42
+    WHILE           décalage et aller à l'état 43
+    IF              décalage et aller à l'état 44
+    SWITCH          décalage et aller à l'état 45
+    CASE            décalage et aller à l'état 46
+    DEFAULT         décalage et aller à l'état 47
+    IDENTIFICATEUR  décalage et aller à l'état 48
+    BREAK           décalage et aller à l'état 49
+    RETURN          décalage et aller à l'état 50
+    '{'             décalage et aller à l'état 51
+
+    instruction  aller à l'état 157
+    iteration    aller à l'état 54
+    selection    aller à l'état 55
+    saut         aller à l'état 56
+    affectation  aller à l'état 57
+    bloc         aller à l'état 58
+    appel        aller à l'état 59
+    variable     aller à l'état 60
+
+
+État 157
+
+   27 iteration: FOR '(' affectation ';' condition ';' affectation ')' instruction .
+
+    $défaut  réduction par utilisation de la règle 27 (iteration)

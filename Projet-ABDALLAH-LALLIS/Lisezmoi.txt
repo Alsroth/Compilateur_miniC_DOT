@@ -1,0 +1,43 @@
+Ce projet contient un compilateur qui transforme un programme miniC en un programme DOT.
+
+Pour lancer le compilateur, vous pouvez exécuter ces commandes ci-dessous dans un terminal en vous plaçant dans le dossier Projet-ABDALLAH-LALLIS :
+
+-       sudo chmod +x lexYacc.txt
+-	./lexYacc.txt miniC
+
+
+Ensuite pour tester le compilateur avec le fichier Tests/nomdutest.c, exécutez cette commande :
+
+-	./compiler < Tests/nomdutest.c nomdesortie
+
+Le fichier de destination se trouve dans DOT/nomdesortie.dot .
+
+Par exemple, pour tester le fichier Tests/add.c, la commande à executer sera :
+
+-	./compiler < Tests/add.c add
+
+un fichier add.dot est créé dans le dossier de destination DOT .
+
+Tous les tests fonctionnent. 
+Le dossier DOT_TEST contient les fichiers de sortie dot réalisés sur nos machines.
+
+Nous avons créé un test de semantique "testSemantique.c" qui test :
+- les redéfinitions de variables et de fonctions.
+- les variables et fonctions non déclarées.
+- Une fonction de type void ne peux pas avoir de retour.
+- Vérifie le bon nombres de paramètres à l'appel d'une fonction.
+- Verifie lors de la declaration d'une fonction que ses paramètres ont des noms différents.
+- Reconnait les variables globales et locales dans un bloc.
+
+Bonne correction. 
+
+
+
+
+
+
+
+
+
+
+

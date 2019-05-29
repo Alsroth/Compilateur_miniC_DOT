@@ -1,0 +1,80 @@
+digraph mon_programme {
+node1[shape=ellipse label="res" style=solid color=black]
+node3[shape=ellipse label="a" style=solid color=black]
+node5[shape=ellipse label="b" style=solid color=black]
+node7[shape=ellipse label="*" style=solid color=black]
+node8[shape=ellipse label="c" style=solid color=black]
+node10[shape=ellipse label="d" style=solid color=black]
+node12[shape=ellipse label="+" style=solid color=black]
+node13[shape=ellipse label="/" style=solid color=black]
+node14[shape=ellipse label="a" style=solid color=black]
+node16[shape=ellipse label="c" style=solid color=black]
+node18[shape=ellipse label="-" style=solid color=black]
+node19[shape=ellipse label="*" style=solid color=black]
+node20[shape=ellipse label="b" style=solid color=black]
+node22[shape=ellipse label="d" style=solid color=black]
+node24[shape=ellipse label="+" style=solid color=black]
+node25[shape=ellipse label="+" style=solid color=black]
+node26[shape=ellipse label="a" style=solid color=black]
+node28[shape=ellipse label="+" style=solid color=black]
+node29[shape=ellipse label="b" style=solid color=black]
+node31[shape=ellipse label="*" style=solid color=black]
+node32[shape=ellipse label="e" style=solid color=black]
+node34[shape=ellipse label="*" style=solid color=black]
+node35[shape=ellipse label="x1" style=solid color=black]
+node37[shape=ellipse label="b" style=solid color=black]
+node39[shape=ellipse label="*" style=solid color=black]
+node40[shape=ellipse label="c" style=solid color=black]
+node42[shape=ellipse label="y2" style=solid color=black]
+node44[shape=ellipse label="-" style=solid color=black]
+node45[shape=ellipse label="/" style=solid color=black]
+node46[shape=ellipse label="x1" style=solid color=black]
+node48[shape=ellipse label="x2" style=solid color=black]
+node50[shape=ellipse label="*" style=solid color=black]
+node51[shape=ellipse label="+" style=solid color=black]
+node52[shape=ellipse label="+" style=solid color=black]
+node53[shape=ellipse label="=:" style=solid color=black]
+node54[shape=ellipse label="0" style=solid color=black]
+node55[shape=trapezium label="RETURN" style=solid color=blue]
+node56[shape=ellipse label="BLOC" style=solid color=black]
+node57[shape=invtrapezium label="int , main" style=solid color=blue]
+node57->node56
+node56->node55
+node55->node54
+node56->node53
+node53->node52
+node34->node51
+node45->node50
+node50->node48
+node50->node46
+node51->node45
+node39->node44
+node44->node42
+node44->node40
+node45->node39
+node39->node37
+node51->node35
+node52->node34
+node31->node32
+node34->node31
+node31->node29
+node52->node28
+node28->node26
+node28->node25
+node19->node24
+node24->node22
+node24->node20
+node25->node19
+node13->node18
+node18->node16
+node18->node14
+node19->node13
+node7->node12
+node12->node10
+node12->node8
+node13->node7
+node7->node5
+node25->node3
+node53->node1
+
+}
