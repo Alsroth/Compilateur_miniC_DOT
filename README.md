@@ -7,7 +7,7 @@ Il contient un compilateur qui transforme un programme miniC en un programme DOT
 
 Pour lancer le compilateur, vous pouvez exécuter ces commandes ci-dessous dans un terminal en vous plaçant dans le dossier Projet-ABDALLAH-LALLIS :
 
--       sudo chmod +x lexYacc.txt
+-  sudo chmod +x lexYacc.txt
 -	./lexYacc.txt miniC
 
 Ensuite pour tester le compilateur avec le fichier Tests/nomdutest.c, exécutez cette commande :
