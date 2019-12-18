@@ -1,9 +1,17 @@
-# Compilateur_miniC_DOT
+# Description 
+
+Un compilateur qui transforme un programme miniC en un programme DOT réalisé en groupe de 2. 
+
+# Tech
+
+- Lex
+- Yacc
+- C
+
+# Compilation
 
 Pour pouvoir tester ce projet il est necessaire d'avoir lex et yacc d'installer sur votre machine.
 De plus ce projet à été prévu pour fonctionner sur linux et mac.
-
-Il contient un compilateur qui transforme un programme miniC en un programme DOT réalisé en groupe de 2. 
 
 Pour lancer le compilateur, vous pouvez exécuter ces commandes ci-dessous dans un terminal en vous plaçant dans le dossier Projet-ABDALLAH-LALLIS :
 
